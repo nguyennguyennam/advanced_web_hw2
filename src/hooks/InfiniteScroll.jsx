@@ -30,19 +30,21 @@ export default function useInfiniteScroll() {
         setHasMore(false);
         return;
       }
-
-      const updated = [...images, ...newImages];
-      setImages(updated);
-      setPage((prev) => prev + 1);
-      sessionStorage.setItem(
-        CACHE_KEY,
-        JSON.stringify({ images: updated, page: page + 1 })
-      );
+      //Update state and cache
+      setImages(prevImages => {
+        const updatedImages = [...prevImages, ...newImages];
+        sessionStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({ images: updatedImages, page: page + 1 })
+        );
+        return updatedImages;
+      });
+      setPage(prev => prev + 1);
     } catch (err) {
       console.error("Failed to fetch images:", err);
     }
     setLoading(false);
-  }, [page, hasMore, images, loading]);
+  }, [page, hasMore, loading]);
 
   //Auto-fetch every 5s
   useEffect(() => {
@@ -50,7 +52,15 @@ export default function useInfiniteScroll() {
     intervalRef.current = setInterval(() => {
         loadMoreImages();
     }, 5000);
-  })
+    
+    // Cleanup interval on unmount
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [hasMore, loadMoreImages]); // Add dependencies
 
   // Save scroll position whenever user scrolls
   useEffect(() => {
