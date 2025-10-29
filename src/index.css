@@ -1,0 +1,77 @@
+/* --- Masonry Layout Fix --- */
+.masonry-grid {
+  display: flex;
+  margin-left: -1.5rem; 
+  width: auto;
+}
+
+.masonry-column {
+  padding-left: 1.5rem; 
+  background-clip: padding-box;
+}
+
+/* Ensure card container acts as positioned ancestor for absolute overlays */
+.masonry-column .group {
+  position: relative;
+}
+
+.masonry-column > div {
+  margin-bottom: 1.5rem;
+}
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.glow-spinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid rgba(200, 200, 200, 0.2);
+  border-top: 5px solid #3b82f6; /* xanh dương */
+  border-radius: 50%;
+  animation: spin 1s linear infinite, glow 1.5s ease-in-out infinite alternate;
+}
+
+.spinner-label {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  font-family: monospace;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 4px #3b82f6; }
+  100% { box-shadow: 0 0 12px #3b82f6; }
+}
+
+.author-overlay {
+  /* Overlay author inside the image container, anchored to the bottom */
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.group:hover .author-overlay {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateX(-50%) translateY(-2px);
+}
+
+
