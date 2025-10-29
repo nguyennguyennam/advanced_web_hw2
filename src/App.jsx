@@ -11,6 +11,7 @@ function App() {
     <BrowserRouter>
     <Header/>
       <Routes>
+        <Route path="/" element={<Navigate to="/photos" replace />} />
         <Route path="/photos" element={<Gallery />} />
         <Route path="/photos/:id" element={<PhotoDetailPage />} />
       </Routes>
