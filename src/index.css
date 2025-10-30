@@ -18,6 +18,55 @@
 .masonry-column > div {
   margin-bottom: 1.5rem;
 }
+
+/* Ensure images are fluid and not forced to full container height (overrides inline styles) */
+.masonry-column img {
+  width: 100%;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 800px) {
+  .masonry-grid {
+    margin-left: -1rem;
+  }
+  .masonry-column {
+    padding-left: 1rem;
+  }
+  .masonry-column > div {
+    margin-bottom: 1rem;
+  }
+  .author-overlay {
+    font-size: 0.9rem;
+    padding: 5px 8px;
+    bottom: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  /* Reduce paddings and gaps on very small screens */
+  .masonry-grid {
+    margin-left: -0.5rem;
+  }
+  .masonry-column {
+    padding-left: 0.5rem;
+  }
+  .masonry-column > div {
+    margin-bottom: 0.75rem;
+  }
+  .author-overlay {
+    font-size: 0.8rem;
+    padding: 4px 6px;
+    bottom: 6px;
+  }
+  /* Ensure page padding is smaller on mobile if Tailwind utilities not present */
+  .p-6 {
+    padding: 0.5rem !important;
+  }
+}
 .spinner-container {
   display: flex;
   flex-direction: column;

@@ -42,14 +42,7 @@ export default function Gallery() {
                   src={image.download_url}
                   className="w-full object-cover hover:scale-105 transition-transform duration-300"
                   loading="lazy"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    position: "relative",
-                    zIndex: 0
-                  }}
+                  alt={image.author || 'photo'}
                 />
                 <div className="author-overlay">
                   {image.author || "Unknown"}
