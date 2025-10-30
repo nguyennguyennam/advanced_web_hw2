@@ -42,47 +42,57 @@
   .author-overlay {
     font-size: 0.9rem;
     padding: 5px 8px;
+    aspect-ratio: 4/3;
     bottom: 8px;
   }
 }
 
 @media (max-width: 500px) {
+  /* Mobile-first responsive adjustments */
+  @media (max-width: 1024px) {
+    .masonry-grid {
+      margin-left: -0.75rem;
+    }
+    .masonry-column {
+      padding-left: 0.75rem;
+    }
+    .masonry-column > div {
+      margin-bottom: 0.75rem;
+    }
+  }
+
   /* Reduce paddings and gaps on very small screens */
   .masonry-grid {
-    margin-left: -0.5rem;
+      margin-left: -0.5rem;
   }
   .masonry-column {
-    padding-left: 0.5rem;
+      padding-left: 0.5rem;
   }
   .masonry-column > div {
-    margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
   }
   .author-overlay {
     font-size: 0.8rem;
     padding: 4px 6px;
     bottom: 6px;
   }
+    /* Adjust main container padding */
+    .p-6 {
+      padding: 0.75rem !important;
+    }
   /* Ensure page padding is smaller on mobile if Tailwind utilities not present */
   .p-6 {
     padding: 0.5rem !important;
-  }
-}
-.spinner-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
+    .masonry-column img {
+      aspect-ratio: 3/4; /* Tối ưu tỷ lệ ảnh cho mobile */
 
 .glow-spinner {
   width: 48px;
   height: 48px;
   border: 5px solid rgba(200, 200, 200, 0.2);
   border-top: 5px solid #3b82f6; /* xanh dương */
-  border-radius: 50%;
   animation: spin 1s linear infinite, glow 1.5s ease-in-out infinite alternate;
-}
+      padding: 0.5rem 0.25rem !important;
 
 .spinner-label {
   margin-top: 0.5rem;
@@ -122,5 +132,4 @@
   background: rgba(0, 0, 0, 0.8);
   transform: translateX(-50%) translateY(-2px);
 }
-
 

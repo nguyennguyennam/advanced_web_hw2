@@ -8,8 +8,9 @@ import EndImages from "../components/EndBox";
 
 const breakpointColumnsObj = {
   default: 4,
-  1200: 3,
-  800: 2,
+  1280: 3,
+  1024: 2,
+  768: 2,
   500: 1,
 };
 
