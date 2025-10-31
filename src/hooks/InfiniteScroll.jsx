@@ -76,14 +76,28 @@ export default function useInfiniteScroll() {
     if (!restored.current) {
       const savedY = sessionStorage.getItem(SCROLL_KEY);
       if (savedY) {
-        // Delay ensures images render before scrolling
-        setTimeout(() => {
+        // Function to attempt scroll restoration
+        const tryRestore = (attempts = 0) => {
+          // Check if images are loaded
+          const imageElements = document.querySelectorAll('.masonry-column img');
+          const loadedImages = Array.from(imageElements).filter(img => img.complete);
+          
+          if (loadedImages.length < imageElements.length && attempts < 5) {
+            // If not all images are loaded, retry after a delay
+            setTimeout(() => tryRestore(attempts + 1), 500);
+            return;
+          }
+
+          // Attempt to restore scroll position
           window.scrollTo({ top: parseFloat(savedY), behavior: "instant" });
-        }, 100);
+        };
+
+        // Initial delay to let React finish rendering
+        setTimeout(() => tryRestore(), 300);
       }
       restored.current = true;
     }
-  }, []);
+  }, [images]); // Add images as dependency to react to changes
 
   return { images, hasMore, loadMoreImages };
 }
